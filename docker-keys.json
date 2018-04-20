@@ -1,0 +1,5 @@
+{
+    "docker_registry_url": "<your-url>",
+    "docker_registry_username": "<your-username>",
+    "docker_registry_password": "<your-password>"
+}
