@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Submit script"""
+"""
+Submit script.
+
+Builds and pushes a docker image for evaluation.
+
+Requires docker-keys.json to be set up.
+"""
 import argparse
 import codecs
 import json
@@ -8,7 +14,10 @@ import os
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Submit a script to OpenAI')
+    parser = argparse.ArgumentParser(
+        description='Build and push a Docker image for evaluation.',
+        epilog='Requires `docker-keys.json` to be properly set up.'
+    )
     parser.add_argument('tag', type=str, help='the tag for the submission')
 
     args = parser.parse_args()
@@ -23,7 +32,8 @@ if __name__ == '__main__':
 
     os.system(
         'docker login %s --username "%s" --password "%s"' %
-        (url, username, password))
+        (url, username, password)
+    )
 
     os.system('docker build -t %s/%s .' % (url, args.tag))
 

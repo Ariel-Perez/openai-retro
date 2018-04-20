@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Code for agents to run on the environment."""
 import abc
 import random
 

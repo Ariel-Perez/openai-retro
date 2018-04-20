@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Run script"""
-import gym_remote.exceptions as gre
-import gym_remote.client as grc
-import retro_contest.local as local
+"""Run script."""
 import agents
 import argparse
 
 
 def create_environment(remote):
     return grc.RemoteEnv('tmp/sock') if remote else \
-        local.make(game='SonicTheHedgehog-Genesis', state='LabyrinthZone.Act1')
+        local.make(
+            game='SonicTheHedgehog-Genesis',
+            state='LabyrinthZone.Act1'
+        )
 
 
 def create_agent(env):
@@ -22,6 +22,12 @@ if __name__ == '__main__':
     parser.add_argument('-remote', action='store_true', help='whether to run on remote mode')
 
     args = parser.parse_args()
+
+    if args.remote:
+        import gym_remote.exceptions as gre
+        import gym_remote.client as grc
+    else:
+        import retro_contest.local as local
 
     try:
         env = create_environment(args.remote)
@@ -36,5 +42,5 @@ if __name__ == '__main__':
             if done:
                 env.reset()
 
-    except gre.GymRemoteError as e:
+    except Exception as e:
         print('exception', e)

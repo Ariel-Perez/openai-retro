@@ -1,4 +1,9 @@
+# Python build objects
 __pycache__
 *.pyc
 
+# Output produced by running local evaluations
+results
+
+# Private keys
 docker-keys.json

@@ -15,7 +15,7 @@ git update-index --assume-unchanged docker-keys.json
 
 ## Running the Code
 ```bash
-python run.py [-h] [-remote]
+python src/run.py [-h] [-remote]
 
 Run the agent. Defaults to local mode, and displays the screen as the agent plays.
 
@@ -28,11 +28,37 @@ optional arguments:
 ```bash
 python submit.py [-h] tag
 
-Submit a script to OpenAI using Docker. Requires `docker-keys.json` to be properly set up.
+Build and push a Docker image for evaluation.
 
 positional arguments:
   tag         the tag for the submission
 
 optional arguments:
   -h, --help  show this help message and exit
+
+Requires `docker-keys.json` to be properly set up.
 ```
+
+* Note: If you did not set up Docker to run without `sudo`, you will have to use `sudo` for this command.
+
+## Testing
+Unit testing is done using [pytest](https://docs.pytest.org/en/latest/).
+
+```bash
+python -m pytest
+```
+
+To run a created Docker image before kicking off a Job on OpenAI's servers:
+```bash
+usage: python test_submission.py [-h] tag
+
+Test a submitted Docker image locally.
+
+positional arguments:
+  tag         the submission's tag
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+* Note: If you did not set up Docker to run without `sudo`, you will have to use `sudo` for this command.
